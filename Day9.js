@@ -7,6 +7,6 @@ arena.style.backgroundColor='black';
 arena.style.padding='50px';
 arena.style.fontSize='32px';
 arena.style.textAlign='center';
-}
+};
 
-triggerBtn.addEventListener('click',castDomain)
+triggerBtn.addEventListener('click',castDomain);
