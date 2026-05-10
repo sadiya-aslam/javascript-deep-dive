@@ -62,7 +62,7 @@ body {
     transform: scale(0.96);
 }
 #card-container {
-    height: 400px;
+    height: auto;
     width: 300px;
     background-color: #fff0f5;
     border-radius: 5px;
@@ -74,7 +74,7 @@ body {
     
 }
 
-#gif-container {
+img{
     border-radius: 15px;
     max-width: 100%;
     height: auto;
@@ -106,3 +106,4 @@ body {
     color: #E91E63;
     
 }
+
