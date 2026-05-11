@@ -21,7 +21,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* display: none; */
+  
 }
 
 #display-btn{
@@ -64,11 +64,11 @@ body {
 #card-container {
     height: auto;
     width: 300px;
-    background-color: #fff0f5;
+    background-color: #f6dbe4;
     border-radius: 5px;
     text-align: center;
     border: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(232, 67, 117, 0.5);
     justify-content: center;
     align-items: center;
     
@@ -79,8 +79,10 @@ img{
     max-width: 100%;
     height: auto;
     margin-top: 20px;
+    
     overflow: hidden;
     border: none;
+    background: #f9e5ec;;
 }
 
 #happy,
@@ -102,7 +104,7 @@ img{
     font-family: sans-serif;
     font-weight: 700;
     font-size: 25px;
-    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.5);
     color: #E91E63;
     
 }
