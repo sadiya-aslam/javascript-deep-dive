@@ -1,0 +1,11 @@
+#board-container{
+    display: flex;
+gap: 5px;
+}
+
+#notice{
+    height: auto;
+    width: auto;
+    border: 2px solid black;
+padding: 2px;
+}
