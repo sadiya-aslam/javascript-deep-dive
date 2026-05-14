@@ -8,5 +8,24 @@ const slayerCorps = [
 ];
 
 
-let 
+let searchInput=document.getElementById('search-bar');
+let container=document.getElementById('corps-container');
 
+function renderSlayer(data){
+let card=data.map(char=>`<div><span>${char.name}</span>: <span>${char.style}</span></div>`).join('')
+container.innerHTML=card;
+}
+
+
+function filterSlayer(){
+    
+    let searchItem=searchInput.value.toLowerCase()
+  
+    let newSlayerArray=slayerCorps.filter(char=>char.name.toLowerCase().includes(searchItem) || char.style.toLowerCase().includes(searchItem));
+   
+    renderSlayer(newSlayerArray)
+    
+}
+
+searchInput.addEventListener('input',filterSlayer)
+renderSlayer(slayerCorps)
