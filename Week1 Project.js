@@ -8,7 +8,7 @@ let postBtn = document.getElementById('post-notice');
 let title = document.getElementById('title');
 let author = document.getElementById('author');
 let msg = document.getElementById('message');
-let deleteBtn=document.getElementById('delete-btn');
+let deleteBtn=document.getElementById('delete-notice');
 
 function renderBoard() {
     
@@ -32,8 +32,12 @@ let newNotices =
     renderBoard();
 }
 
-
+function deleteNotice(){
+    notices.pop()
+    renderBoard()
+}
 
 postBtn.addEventListener('click', updateNoticeBoard);
-
+deleteBtn.addEventListener('click',deleteNotice);
 renderBoard();
+
