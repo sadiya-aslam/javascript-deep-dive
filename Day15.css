@@ -6,9 +6,17 @@ body{
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    flex-direction: column;
 }
 
-
+#search-bar{
+    margin: 10px 0;
+}
+input,button{
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 20px;
+}
 #anime-container{
     width: 320px;
     background: #ffffff;
