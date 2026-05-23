@@ -6,7 +6,9 @@ let backBtn=document.getElementById('back-btn');
 let currentSearch = []
 let favorites = JSON.parse(localStorage.getItem('favAnime')) || []
 
-
+let currentPage=1;
+let currentQuery=''
+let isFetching=false;
 function renderAnimeData(rawData, isFavorite = false) {
     if (rawData.data && rawData.data.length > 0) {
         container.innerHTML = rawData.data.map(anime => {
@@ -24,19 +26,34 @@ function renderAnimeData(rawData, isFavorite = false) {
     }
 
 }
-async function getAnimeData(animeName) {
-    container.innerHTML = `<h1 style="text-align: center;">Loading... ⏳</h1>`;
+async function getAnimeData(animeName,isNewSearch=true) {
+    if(isFetching){
+        return;
+    }
+    isFetching=true;
+    if(isNewSearch){
+        currentPage=1;
+        currentSearch=[];
+        container.innerHTML = `<h1 style="text-align: center;">Loading... ⏳</h1>`
+    }
+    
     let safeName = encodeURIComponent(animeName)
-    let response = await fetch(`https://api.jikan.moe/v4/anime?q=${safeName}`);
+    let response = await fetch(`https://api.jikan.moe/v4/anime?q=${safeName}&page=${currentPage}`);
     let rawData = await response.json();
-    currentSearch = rawData.data
-    renderAnimeData(rawData)
+
+    if(rawData.data && rawData.data.length>0){
+       currentSearch = currentSearch.concat(rawData.data);
+       renderAnimeData({data:currentSearch},false)
+       currentPage++;
+    }
+    
+    isFetching=false;
 }
 
 
 function handleSearch() {
-    let userInput = searchInput.value
-    getAnimeData(userInput)
+    currentQuery = searchInput.value
+    getAnimeData(currentQuery,true)
     searchInput.value = ""
 }
 
@@ -70,4 +87,12 @@ backBtn.addEventListener('click',()=>{
 })
 getAnimeData('Attack on Titan');
 
+const observer=new IntersectionObserver((entries)=>{
+    let tripwire=entries[0];
+    if (tripwire.isIntersecting && currentQuery!==""){
+        getAnimeData(currentQuery,false);
+    }
+});
 
+let targetDiv=document.getElementById('loading-trigger');
+observer.observe(targetDiv);
