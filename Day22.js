@@ -4,12 +4,15 @@ let searchInput = document.getElementById('search-input');
 let favBtn = document.getElementById('fav-anime');
 let backBtn = document.getElementById('back-btn');
 let closeModalBtn = document.getElementById('close-modal');
+let previousBtn=document.getElementById('prev-btn');
+let nextBtn=document.getElementById('next-btn');
+let pageNo=document.getElementById('page-info')
 let currentSearch = []
 let favorites = JSON.parse(localStorage.getItem('favAnime')) || []
 
 let currentPage = 1;
 let currentQuery = ''
-let isFetching = false;
+
 function renderAnimeData(rawData, isFavorite = false) {
     if (rawData.data && rawData.data.length > 0) {
         container.innerHTML = rawData.data.map(anime => {
@@ -21,37 +24,36 @@ function renderAnimeData(rawData, isFavorite = false) {
     <p>${anime.synopsis}</p>
     ${buttonHtml}
     </div>`}).join('')
+
     }
     else {
         container.innerHTML = `<h1>Sorry, we couldn't find that anime!</h1>`
     }
 
 }
-async function getAnimeData(animeName, isNewSearch = true) {
-    if (isFetching) {
-        return;
-    }
-    isFetching = true;
-    if (isNewSearch) {
-        currentPage = 1;
-        currentSearch = [];
-        container.innerHTML = `<h1 style="text-align: center;">Loading... ⏳</h1>`
-    }
+async function getAnimeData(animeName) {
+    
 try{
     let safeName = encodeURIComponent(animeName)
     let response = await fetch(`https://api.jikan.moe/v4/anime?q=${safeName}&page=${currentPage}`);
     let rawData = await response.json();
 
-    if (rawData.data && rawData.data.length > 0) {
-        currentSearch = currentSearch.concat(rawData.data);
-        renderAnimeData({ data: currentSearch }, false)
-        currentPage++;
-    }
+    if(rawData.data){
+    renderAnimeData(rawData,false)
+    currentSearch=rawData.data;
+    if(rawData.pagination.has_next_page ===false ){
+nextBtn.style.display="none"
+     }
+     else{
+        nextBtn.style.display="inline-block"
+     }
+}
+
 }
 catch (e){
     container.innerHTML="<h2>⚠️ Network Error: Please check your internet connection or try again later.</h2>"
 }
-    isFetching = false;
+  
 }
 
 let typingTimer;
@@ -61,7 +63,7 @@ function handleLiveSearch() {
     typingTimer = setTimeout(() => {
         currentQuery = searchInput.value
         if (currentQuery !== '') {
-            getAnimeData(currentQuery, true)
+            getAnimeData(currentQuery)
         }
         
     }, 500)
@@ -99,15 +101,7 @@ backBtn.addEventListener('click', () => {
 })
 getAnimeData('Attack on Titan');
 
-const observer = new IntersectionObserver((entries) => {
-    let tripwire = entries[0];
-    if (tripwire.isIntersecting && currentQuery !== "") {
-        getAnimeData(currentQuery, false);
-    }
-});
 
-let targetDiv = document.getElementById('loading-trigger');
-observer.observe(targetDiv);
 
 async function openModal(animeId){
 animeModal.classList.remove('hidden');
@@ -149,3 +143,24 @@ window.addEventListener('click',(event)=>{
     }
 })
 
+function nextPage(){
+    currentPage++;
+    pageNo.innerHTML=`Page ${currentPage}`
+    getAnimeData(currentQuery);
+    
+}
+
+function previousPage(){
+    
+    if(currentPage>1){
+         currentPage--;
+         pageNo.innerHTML=`Page ${currentPage}`
+         getAnimeData(currentQuery);
+    }
+    
+    console.log(currentPage)
+   
+}
+
+nextBtn.addEventListener('click',nextPage);
+previousBtn.addEventListener('click',previousPage);
