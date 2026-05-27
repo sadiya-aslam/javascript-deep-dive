@@ -7,7 +7,8 @@ let closeModalBtn = document.getElementById('close-modal');
 let previousBtn=document.getElementById('prev-btn');
 let nextBtn=document.getElementById('next-btn');
 let pageNo=document.getElementById('page-info');
-
+let genreDropDown=document.getElementById('genre-select');
+let animeGenre=""
 let currentSearch = []
 let favorites = JSON.parse(localStorage.getItem('favAnime')) || []
 
@@ -35,8 +36,12 @@ function renderAnimeData(rawData, isFavorite = false) {
 async function getAnimeData(animeName) {
     
 try{
-    let safeName = encodeURIComponent(animeName)
-    let response = await fetch(`https://api.jikan.moe/v4/anime?q=${safeName}&page=${currentPage}`);
+    let safeName = encodeURIComponent(animeName);
+    let api=`https://api.jikan.moe/v4/anime?q=${safeName}&page=${currentPage}`
+    if(animeGenre!==""){
+        api+=`&genres=${animeGenre}`
+    }
+    let response = await fetch(api);
     let rawData = await response.json();
 
     if(rawData.data){
@@ -168,3 +173,9 @@ function previousPage(){
 nextBtn.addEventListener('click',nextPage);
 previousBtn.addEventListener('click',previousPage);
 
+genreDropDown.addEventListener('change',(event)=>{
+    animeGenre=event.target.value
+    currentPage=1;
+    pageNo.innerHTML=`Page ${currentPage}`
+    getAnimeData(currentQuery)
+})

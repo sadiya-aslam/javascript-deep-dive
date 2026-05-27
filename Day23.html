@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Day21.css">
+    <link rel="stylesheet" href="Day22.css">
+    <link rel="stylesheet" href="Day23.css">
+</head>
+<body>
+    <div id="search-bar">
+        <button id="back-btn">&larr;</button>
+        <div id="genre-filters" class="filter-container">
+    <select id="genre-select" class="genre-dropdown">
+        <option value="">All Genres</option>
+        <option value="1">Action</option>
+        <option value="4">Comedy</option>
+        <option value="8">Drama</option>
+        <option value="10">Fantasy</option>
+        <option value="22">Romance</option>
+        <option value="27">Shounen</option>
+    </select>
+</div>
+    
+    <input type="text" id="search-input" placeholder="Enter anime name...">
+    
+    <button id="fav-anime">Favorite Anime</button>
+    </div>
+    <div id="anime-container"></div>
+    <div id="pagination-controls" class="pagination-wrapper">
+    <button id="prev-btn" class="nav-btn">&larr; Previous</button>
+    <span id="page-info">Page 1</span>
+    <button id="next-btn" class="nav-btn">Next &rarr;</button>
+</div>
+    
+    <div id="anime-modal" class="modal-overlay hidden">
+    
+    <div class="modal-content">
+        <span id="close-modal" class="close-btn">&times;</span>
+        
+        <div id="modal-body">
+            <h2 style="text-align: center;">Loading Details... ⏳</h2>
+        </div>
+    </div>
+
+</div>
+    <script src="Day23.js"></script>
+</body>
+</html>
