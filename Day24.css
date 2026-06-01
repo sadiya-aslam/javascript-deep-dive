@@ -1,0 +1,35 @@
+.skeleton-card{
+    cursor: default;
+    animation: skeleton-loading 1.5s linear infinite;
+}
+
+@keyframes skeleton-loading{
+    0% {
+        opacity: 0.5;
+    }
+     50% {
+        opacity: 1;
+    }
+     100% {
+        opacity: 0.5;
+    }
+}
+.skeleton-img {
+    height: 300px; 
+    background-color: #3a3f50;
+    border-radius: 10px; 
+}
+
+.skeleton-title {
+    height: 25px;
+    background-color: #3a3f50;
+    border-radius: 5px;
+    margin-top: 15px; 
+}
+
+.skeleton-text {
+    height: 60px;
+    background-color: #3a3f50;
+    border-radius: 5px;
+    margin-top: 10px; 
+}
