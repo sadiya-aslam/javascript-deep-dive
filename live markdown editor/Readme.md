@@ -3,7 +3,7 @@
 > A lightweight, real-time Markdown compiler with a built-in formatting toolbar and a sleek dark-mode UI.
 
 ## 🔗 Live Demo
-[Click here to view the live application](#) *(Link coming soon!)*
+[Click here to view the live application](https://custom-live-markdown-editor.netlify.app/) 
 
 ## 📸 Sneak Peek
 ![Project Screenshot](./screenshot.png) 

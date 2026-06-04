@@ -3,7 +3,7 @@
 > A dynamic, data-driven web application that fetches and displays real-time anime statistics, trailers, and details.
 
 ## 🔗 Live Demo
-[Click here to view the live application](#) *(Link coming soon!)*
+[Click here to view the live application](https://custom-anime-dashboard.netlify.app/) 
 
 ## 📸 Sneak Peek
 
