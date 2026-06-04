@@ -6,7 +6,7 @@
 [Click here to view the live application](#) *(Link coming soon!)*
 
 ## 📸 Sneak Peek
-![Project Screenshot](./screenshot.png) 
+![Project Screenshot] 
 
 ## ✨ Core Features
 * **Asynchronous API Integration:** Leveraged the Jikan API to fetch and render real-time data seamlessly without blocking the main thread.
